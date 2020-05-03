@@ -1,0 +1,23 @@
+[
+
+  {
+    "id": 1,
+    "name": "Spongebob",
+    "occupation": "chef"
+    
+  },
+  {
+    "id": 2,
+    "name": "Squidward",
+    "occupation": "Cook"
+   
+  },
+  {
+    "id": 3,
+    "name": "Sandy Cheeks",
+    "occupation": "Nothing"
+   
+  }
+    
+
+]
