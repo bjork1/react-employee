@@ -9,6 +9,22 @@ import Wrapper from "./components/Wrapper";
 import {BootstrapTable, TableHeaderColumn} from 'react-bootstrap-table';
 
 
+const genderType = {
+
+  0: 'Girl',
+
+  1: 'Boy'
+
+};
+function enumFormatter(cell, row, enumObject) {
+
+  return enumObject[cell];
+
+}
+
+function imageFormatter(cell, row){
+  return (<img style={{width:50}} src={cell}/>);
+}
 
 class App extends Component {
 
@@ -25,11 +41,14 @@ class App extends Component {
         <Title></Title>
           <BootstrapTable data = {employees} version='4'>
            
-            <TableHeaderColumn dataField='id' isKey>ID</TableHeaderColumn>
+          <TableHeaderColumn dataField='image' dataFormat={imageFormatter}>Photo</TableHeaderColumn>
+<TableHeaderColumn dataField='name' filter={ { type: 'TextFilter', delay: 1000 }  } isKey>Full Name</TableHeaderColumn>
 
-<TableHeaderColumn dataField='name' filter={ { type: 'TextFilter', delay: 1000 } }>Full Name</TableHeaderColumn>
 
 <TableHeaderColumn dataField='occupation'>Occupation</TableHeaderColumn>
+<TableHeaderColumn dataField='gender' filterFormatted dataFormat={ enumFormatter }
+
+            formatExtraData={ genderType } filter={ { type: 'SelectFilter', options: genderType } }>Gender</TableHeaderColumn>
             
           </BootstrapTable>
 
