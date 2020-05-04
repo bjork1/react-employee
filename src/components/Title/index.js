@@ -4,10 +4,10 @@ import React from "react";
 function Title() {
  return(
 
-<div class="jumbotron jumbotron-fluid">
-  <div class="container">
-    <h1 class="display-4">Employee Directory</h1>
-    <p class="lead">Search for employee information by category.</p>
+<div className="jumbotron jumbotron-fluid">
+  <div className="container">
+    <h1 className="display-4">Employee Directory</h1>
+    <p className="lead">Search for employee information by using the input field for each category. You can sort by clicking the arrows within each field. Use of this data is for professional purposes only.</p>
   </div>
   
   </div>

@@ -1,42 +1,96 @@
 import React from "react";
-//import "./style.css";
+class MyComponent extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      error: null,
+      isLoaded: false,
+      results: [],
+    };
+  }
 
-function EmployeeTable(props) {
+  componentDidMount() {
+    fetch("https://randomuser.me/api/")
+      .then((res) => res.json())
+      .then(
+        (result) => {
+          this.setState({
+            isLoaded: true,
+            results: result.results,
+          });
+        },
+        // Note: it's important to handle errors here
+        // instead of a catch() block so that we don't swallow
+        // exceptions from actual bugs in components.
+        (error) => {
+          this.setState({
+            isLoaded: true,
+            error,
+          });
+        }
+      );
+  }
 
-   
-  render (
-    <div className="card">
-      {/* <div className="img-container">
-        <img alt={props.name} src={props.image} />
-      </div> */}
-      <div className="content">
+  render() {
+    const { error, isLoaded, results } = this.state;
 
-      <table class="table">
-  <thead class="thead-dark">
-    <tr>
-      <th scope="col">Name</th>
-      <th scope="col">Email</th>
-      <th scope="col">Birthday</th>
-      <th scope="col">Phone Number</th>
-    </tr>
-  </thead>
-  
-</table>
+    
 
-<tbody>
-                  <tr>
-                    <th scope="row">{props.name}</th>
-                    <td>{props.email}</td>
-                    <td>{props.birthday}</td>
-                    <td>{props.phone}</td>
-                  </tr>
-                </tbody>
+    if (error) {
+      return <div>Error: {error.message}</div>;
+    } else if (!isLoaded) {
+      return <div>Loading...</div>;
+    } else {
+      return (
+        
+        <BootstrapTable data={system} version="4" options={ options }>
+        {/* <TableHeaderColumn dataField="image" dataFormat={imageFormatter}>
+          Photo
+        </TableHeaderColumn> */}
+        <TableHeaderColumn
+          dataField="first"
+          filter={{ type: "TextFilter", delay: 1000 }}
+          dataSort={ true } isKey
+        >
+          First Name
+        </TableHeaderColumn>
+        {/* <TableHeaderColumn
+          dataField="last"
+          filter={{ type: "TextFilter", delay: 1000 }}
+          isKey dataSort={ true }
+        >
+          Last Name
+        </TableHeaderColumn> */}
+
+        {/* <TableHeaderColumn dataField="position" dataSort={ true } filter={{ type: "TextFilter", delay: 1000 }}>
+          Position
+        </TableHeaderColumn>
+        <TableHeaderColumn dataField="position" dataSort={ true } filter={{ type: "TextFilter", delay: 1000 }}>
+          Department
+        </TableHeaderColumn> */}
+        {/* <TableHeaderColumn
+          dataField="gender"
+          filterFormatted
+          dataFormat={enumFormatter}
+          formatExtraData={genderType}
+          filter={{ type: "SelectFilter", options: genderType }}
+        >
+          Gender
+        </TableHeaderColumn> */}
+      </BootstrapTable>
+        // <ul>
+        //   {results.map(item => (
+        //     <li key={item.email}>
+        //       {item.email} {item.gender} {item.login.username}
+        //     </li>
+        //   ))}
+        // </ul>
+
 
         
-      </div>
-     
-    </div>
-  );
+      );
+    }
+  }
 }
 
-export default EmployeeTable;
+export default MyComponent;
